@@ -1,11 +1,22 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Button } from '@/components/ui/button';
+import Layout from './components/Layout';
+import { ThemeProvider } from './context/theme-provider';
+import WeatherDashboard from './pages/weather-dashboard';
+import CityPage from './pages/city-page';
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button variant="destructive">Click me</Button>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Layout>
+          <Routes>
+            <Route path="/" element={<WeatherDashboard />} />
+            <Route path="/city/:cityName" element={<CityPage />} />
+          </Routes>
+        </Layout>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
